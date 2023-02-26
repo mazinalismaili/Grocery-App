@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery/model.dart';
 
 
 void main() {
@@ -9,19 +10,23 @@ runApp( MaterialApp(
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
   List<String> groceries = ['Apple', 'Banana','Orange'];
-  List<double> groceriesPrice = [0.99,1.49,0.59];
+  List<double> quantity = [0.99,1.49,0.59];
+  List<Item> items = [Item('Apple', 1, 'Item'),Item('Banana', 2, 'Item'),];
+  Item item =  Item('Orange', 1, 'G');
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Center(child:Text('Grocery List App'),)),
       body: ListView.builder(
-        itemCount: groceries.length ,
+        itemCount: items.length ,
         itemBuilder: (BuildContext context, int index){
           return Card(
             child: ListTile(
-              title: Text(groceries[index]),
-              trailing: Text('\$${groceriesPrice[index]}'),
+              title: Text(items[index].getItemName),
+              trailing: Text('${items[index].getQuantity} ${items[index].getUnit}'),
+              //subtitle: Text(item.getUnit),
             ),
             
             // child: Padding(
@@ -37,7 +42,7 @@ class HomeScreen extends StatelessWidget {
             //         color: Colors.black,
             //       ),),
             //       Title(color: Colors.black,
-            //       child: Text(groceriesPrice[index].toString() + ' \$')),
+            //       child: Text(quantity[index].toString() + ' \$')),
             //       SizedBox(height: 5.0,),
 
             //     ],
@@ -45,32 +50,6 @@ class HomeScreen extends StatelessWidget {
           );
         }
         ),
-      /*
-      body: ListView(
-        children: [
-          Container(
-            child: Center(child: Text('Grocery Item 1')),
-            padding: const EdgeInsets.all(20),
-            ),
-
-          Container(
-            child: Center(child: Text('Grocery Item 2')),
-            padding: const EdgeInsets.all(20),
-            ),
-
-          Container(
-            child: Center(child: Text('Grocery Item 3')),
-            padding: const EdgeInsets.all(20),
-            ),
-          
-          Container(
-            child: Center(child: Text('Grocery Item 4')),
-            padding: const EdgeInsets.all(20),
-            ),
-          
-        ],
-      ),
-      */
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
